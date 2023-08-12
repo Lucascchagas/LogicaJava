@@ -169,16 +169,18 @@ public class VerbosRestTest {
 		User user = new User("Usuario XML", 40);
 		
 		given()
+			.log().all()
 			.contentType(ContentType.XML)
 			.body(user)
 		.when()
 			.post("https://restapi.wcaquino.me/usersXML")
 		.then()
+			.log().all()
 			.statusCode(201)
 			.body("user.@id", is(notNullValue()))
 			.body("user.name", is("Usuario XML"))
 			.body("user.age", is("40"))
-			;		
+	;
 	}
 	
 	@Test
